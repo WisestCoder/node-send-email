@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link type="text/css" rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <h1>发送邮件</h1>
+    <p class="of">
+      <label class="fl" for="">接收人邮箱</label>
+      <input type="text" id="emailer" value="" />
+    </p>
+    <p class="of">
+      <label class="fl" for="">标题</label>
+      <input type="text" id="title" value="" />
+    </p>
+    <p class="of">
+      <label class="fl" for="">内容</label>
+      <textarea id="content"></textarea>
+    </p>
+    <p>
+      <label class="fl" for="">附件</label>
+      <span class="file-box">
+        <span class="word">上传附件</span>
+        <input type="file" id="attachment" onchange="saveImg(this)" />
+      </span>
+    </p>
+    <p class="of">
+      <span id="file-list"></span>
+    </p>
+    <div>
+      <button id="send">发送</button>
+    </div>
+    <script>
+      var attachments = [];
+      function saveImg(node) {
+        var file = node.files[0];
+        for (var i = 0; i < attachments.length; i++) {
+          if(file.name == attachments[i].filename) {
+            alert("已经存在名字为（" + file.name + "）的文件！");
+            return;
+          }
+        }
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          data = e.target.result;
+          $("#file-list").append('<span class="file-item">' + file.name +'<em data-filename=' + file.name + ' class="delete">x</em></span>');
+          attachments.push({
+            path: data,
+            filename: file.name
+          });
+        };
+        // 以DataURL的形式读取文件:
+        reader.readAsDataURL(file);
+      }
+      $(function(){
+        $("#file-list").on('click', '.delete', function(e) {
+          var filename = e.target.dataset.filename;
+          for (var i = 0; i < attachments.length; i++) {
+            if(filename == attachments[i].filename) {
+              attachments.splice(i, 1);
+            }
+          }
+          $(this).parent().remove();
+          $("#attachment").val('');
+        });
+
+        $("#send").on('click', function(e) {
+          var params = {};
+          params.title = $("#title").val();
+          params.content = $("#content").val();
+          params.emailer = $("#emailer").val();
+          params.attachments = JSON.stringify(attachments);
+          if (params.title.trim() == "" || params.content.trim() == "" || params.emailer.trim() == "") {
+            alert("接收人或标题或内容不能为空！");
+            return;
+          }
+          $.ajax({
+            type: 'post',
+            url: '/sendEmail',
+            data: params,
+            success: function(content) {
+              if (content.isSuccess) {
+                alert(content.message);
+              }
+            },
+            error: function(err) {
+              console.log(err);
+            }
+          });
+        });
+      })
+    </script>
+  </body>
+</html>

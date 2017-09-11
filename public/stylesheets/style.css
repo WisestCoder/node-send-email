@@ -1,0 +1,107 @@
+body {
+  padding: 10px 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+p {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.of {
+  margin: 10px 0;
+}
+
+#content {
+  width: 800px;
+  height: 300px;
+  border-radius: 3px;
+  resize: none;
+  padding: 3px 6px;
+  line-height: 28px;
+  outline: none;
+}
+
+#title, #emailer {
+  line-height: 28px;
+  height: 28px;
+  padding: 0 4px;
+}
+
+#send {
+  width: 80px;
+  height: 36px;
+  border-radius: 2px;
+  font-weight: bold;
+  border: 1px solid #FF8800;
+  background-color: #FF9900;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  display: inline-block;
+  margin-left: 110px;
+}
+.file-box {
+  height: 20px;
+  width: 100px;
+  position:relative;
+  display: inline-block;
+  cursor: pointer;
+  margin-top: 4px;
+}
+#file-list {
+  display: inline-block;
+  margin-left: 110px;
+  padding-left: 15px;
+  color: #4285f4;
+}
+#file-list .file-item {
+  padding-right: 20px;
+}
+#file-list em:hover {
+  color: orangered;
+  text-decoration: underline;
+  cursor: pointer;
+}
+#file-list em {
+  padding-left: 10px;
+  font-style: normal;
+}
+.word {
+  width: 100px;
+  height: 20px;
+  border-radius: 4px;
+  border: 1px solid #888;
+  line-height: 20px;
+  text-align: center;
+  display: inline-block;
+}
+#attachment {
+  width: 100px;
+  height: 20px;
+  cursor: pointer;
+  font-size: 30px;
+  outline: medium none;
+  position: absolute;
+  filter:alpha(opacity=0);
+  -moz-opacity:0;
+  opacity:0; 
+  left:0px;
+  top: 0px;
+  overflow: hidden;
+}
+.fl {
+  margin-right: 30px;
+  line-height: 30px;
+  width: 80px;
+  text-align: right;
+}
+.fl, #content, #title, #emailer {
+  float: left;
+}
+.of {
+  overflow: hidden;
+}
