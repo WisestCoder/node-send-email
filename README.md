@@ -1,5 +1,7 @@
 # 使用Node、Express、nodemailer发送邮件
 
+![](https://github.com/dushao103500/node-send-email/blob/master/images/demo.gif)
+
 ### 1、clone本项目
 ```bash
 	git clone https://github.com/dushao103500/node-send-email.git
